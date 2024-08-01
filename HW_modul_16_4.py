@@ -32,7 +32,7 @@ async def update_user(user_id:Annotated[int, Path(ge=1, le=500, description="Ent
         edit_user.age = age
         return f"The User {user_id} is updated"
     except IndexError:
-        raise HTTPException(status_code=404, detail='User was not found')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User was not found')
 
 @app.delete('/user/{user_id}')
 async def user_delete(user_id:Annotated[int, Path(ge=1, le=500, description="Enter userID what you want to edit")])->str:
@@ -40,4 +40,4 @@ async def user_delete(user_id:Annotated[int, Path(ge=1, le=500, description="Ent
         users.pop(user_id-1)
         return f"The User {user_id} is deleted"
     except IndexError:
-        raise HTTPException(status_code=404, detail='User not found')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found')
